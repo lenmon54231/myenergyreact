@@ -2,7 +2,7 @@ import React from "react";
 import Nav from '../../layout/nav/nav'
 import  HomeInnerTest from './homeInnerTest/homeInnerTest'
 import { getHomeTestList} from  '../../api/home/home'
-
+import styles  from './home.module.css'
 export default class Home extends React.Component {
   componentDidMount(){
     getHomeTestList().then((res)=>{
@@ -22,9 +22,9 @@ export default class Home extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div >
         <Nav navInfo={ this.state.navInfo }/>
-        <div>
+        <div className={styles.homeContainer}>
             {this.state.testList.map((e)=>{
 return <div key={e?.id}><HomeInnerTest testInfo={e}/></div>
             })}
