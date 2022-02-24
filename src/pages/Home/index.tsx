@@ -43,7 +43,6 @@ const Home = () => {
           </div>
         );
       })}
-
       {/* <LoadingView /> */}
     </div>
   );
