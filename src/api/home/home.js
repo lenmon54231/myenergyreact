@@ -1,10 +1,10 @@
-import http from "../../request/index"
+import http from '../../request/index';
 
 /**
  * 获取首页列表
  */
 function getHomeTestList() {
-    return http("get", "evaluate/v1/evaluate/home")
+  return http('get', 'evaluate/v1/evaluate/home');
 }
 
-export { getHomeTestList }
+export { getHomeTestList };

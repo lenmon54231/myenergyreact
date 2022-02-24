@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+<!--
+ * @Descripttion: ReadMe
+ * @version:
+ * @Author: 小白
+ * @Date: 2020-10-04 10:43:52
+ * @LastEditors: 小白
+ * @LastEditTime: 2022-02-16 22:44:16
+-->
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React-ts-h5-template
 
-## Available Scripts
+## 说明
 
-In the project directory, you can run:
+**该项目是由 Vite 构建,基于 React Hooks 框架配合 Typescript 语言的 H5 端快速开发的模板项目,该项目适配屏幕使用的`postcss-px-to-viewport`直接写 px 自动转换为 vw 或者 rem,项目也添加了路由切换动画,适配`chrome safari底部工具栏`**
 
-### `npm start`
+**项目持续迭代中,如果有疑问[提出 issues](https://github.com/q1104133609/react-ts-h5-template/issues/new)**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 预览地址
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![url](./public/demo.png)
 
-### `npm test`
+## Project setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+yarn install
+```
 
-### `npm run build`
+### Compiles and hot-reloads for development
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+yarn dev
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Compiles and minifies for production
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+yarn build:prod
+```
 
-### `npm run eject`
+### Lints and fixes files
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+yarn lint
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## To-do List
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- [x] vite
+- [x] typescript
+- [x] react-route6
+- [x] postcss-px-to-viewport
+- [x] react-router(route add animotion)
+- [x] cdn
+- [x] antd-mobile5
+- [x] tailwindcss
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 项目目录
 
-## Learn More
+```
+react-ts-h5-template
+├─ .env.dev //dev⚙
+├─ .env.pre //pre⚙
+├─ .env.prod //prod⚙
+├─ config-overrides.js //webpack⚙
+├─ paths.json //alias⚙
+├─ public
+│  ├─ favicon.ico
+│  ├─ index.html //index文件
+│  ├─ manifest.json
+│  └─ robots.txt
+├─ src
+│  ├─ App.css
+│  ├─ App.test.tsx
+│  ├─ App.tsx
+│  ├─ api //请求📃
+│  │  └─ route.ts
+│  ├─ assets  //资源📃
+│  │  ├─ css
+│  │  │  ├─ common.scss
+│  │  │  └─ variables.scss
+│  │  ├─ fonts
+│  │  │  └─ iconfont.json
+│  │  └─ images
+│  │     ├─ common
+│  │     │  └─ 404.png
+│  │     └─ search_tab.png
+│  ├─ components //组件📃
+│  │  ├─ AnimatedSwitch //动画切换组件
+│  │  ├─ LazyImage //懒加载图片组件
+│  │  ├─ LoadingView //加载组件
+│  │  ├─ NoFound //404组件
+│  │  └─ VirList // 虚拟列表组件(完善中)
+│  ├─ constant.ts //常量⚙
+│  ├─ helpers //帮组📃
+│  │  ├─ dispatcher.tsx
+│  │  └─ executor.tsx
+│  ├─ hooks //自定义hooks📃
+│  │  ├─ useAxios.tsx //网络请求hook
+│  │  ├─ useDebounce.tsx //防抖hook
+│  │  ├─ useModel.tsx //模块状态机hook
+│  │  ├─ useThrottle.tsx //节流hook
+│  │  └─ useTitle.tsx //标题hook
+│  ├─ index.tsx // 入口
+│  ├─ layout //布局📃
+│  │  ├─ TabBarView //底部栏
+│  │  └─ Toast //toast
+│  ├─ logo.svg //icon
+│  ├─ model //model📃
+│  ├─ pages //页面
+│  ├─ plugins//插件📃
+│  │  └─ request.ts
+│  ├─ routers //路由📃
+│  ├─ typings //类型📃
+│  └─ utils //工具类📃
+│     └─ index.ts
+└─ tsconfig.json
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 图标地址
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+https://www.iconfont.cn/manage/index?manage_type=myprojects&projectId=2119875
+```
