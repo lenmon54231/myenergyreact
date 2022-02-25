@@ -2,8 +2,8 @@ import { memo, useEffect, useState } from 'react';
 import { NavBar, Space, Toast } from 'antd-mobile';
 import { SearchOutline, MoreOutline } from 'antd-mobile-icons';
 import { getHomeTestList } from '@/api/home/home';
-import { useNavigate } from 'react-router-dom';
-
+import BigTest from '@/components/BigTest/index';
+import styles from './index.module.less';
 const Home = () => {
   const [testList, setTestList] = useState([]);
   const right = (
@@ -19,30 +19,23 @@ const Home = () => {
       content: '点击了返回区域',
       duration: 1000,
     });
-  const nav = useNavigate();
   useEffect(() => {
-    console.log('触发更新');
     getHomeTestList().then((res) => {
-      console.log(res, '11111111');
       setTestList([...testList, ...res?.result]);
     });
   }, []);
   return (
     <div>
-      <NavBar right={right} onBack={back}>
-        标题
-      </NavBar>
-      {testList.map((e) => {
-        return (
-          <div
-            onClick={() => {
-              nav('/highLevelTest');
-            }}
-            key={e?.id}>
-            {e?.name}
-          </div>
-        );
-      })}
+      <div className={styles.navCon}>
+        <NavBar right={right} onBack={back}>
+          标题
+        </NavBar>
+      </div>
+      <div className={styles.main}>
+        {testList.map((e) => {
+          return <BigTest key={e?.id} testInfo={e} />;
+        })}
+      </div>
       {/* <LoadingView /> */}
     </div>
   );

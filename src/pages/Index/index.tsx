@@ -4,7 +4,8 @@ import './index.less';
 const Index: FC = () => {
   console.log('index');
   return (
-    <div className="tabbar_page">
+    // className="tabbar_page"
+    <div>
       <Outlet />
     </div>
   );
