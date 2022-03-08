@@ -1,21 +1,31 @@
-/**
- * 网络请求配置
- */
 import axios from 'axios';
 import { Toast } from 'antd-mobile';
+import history from '@/utils/history';
 
 axios.defaults.timeout = 100000;
 axios.defaults.baseURL = 'https://alpha-puniversity.wanxue.cn/';
 
+// const router = new BrowserRouter();
 /**
  * http request 拦截器
  */
 axios.interceptors.request.use(
   (config) => {
+    const { url } = config;
     config.data = JSON.stringify(config.data);
     config.headers = {
       'Content-Type': 'application/json',
     };
+    if (!url.startsWith('/login') || !url.startsWith('/register')) {
+      console.log(!config.headers.t, '!config.headers.t1');
+      if (!config.headers.t) {
+        // router.history.push('/login');
+        history.replace('/login');
+      } else {
+        //当请求路径不是这两个的时候, 添加token请求头
+        config.headers.t = localStorage.getItem('token');
+      }
+    }
     return config;
   },
   (error) => {
@@ -46,6 +56,7 @@ axios.interceptors.response.use(
  */
 export function get(url, params = {}) {
   return new Promise((resolve, reject) => {
+    console.log(params, url);
     axios
       .get(url, {
         params: params,
