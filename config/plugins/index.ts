@@ -10,7 +10,6 @@ import {
   VITE_APP_LEGACY,
 } from '../constant';
 import styleImport from './styleImport';
-import visualizerPlugin from './visualizer';
 import windiCSS from './windicss';
 
 export const createVitePlugins = (viteEnv: string, isBuild: boolean) => {
@@ -22,7 +21,7 @@ export const createVitePlugins = (viteEnv: string, isBuild: boolean) => {
   // windicss
   vitePlugins.push(windiCSS());
   // visualizer
-  VITE_APP_ANALYZE && vitePlugins.push(visualizerPlugin());
+  // VITE_APP_ANALYZE && vitePlugins.push(visualizerPlugin());
   if (isBuild) {
     // gzip
     VITE_APP_COMPRESS_GZIP &&

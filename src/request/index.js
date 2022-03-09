@@ -15,15 +15,15 @@ axios.interceptors.request.use(
     config.data = JSON.stringify(config.data);
     config.headers = {
       'Content-Type': 'application/json',
+      a: 15,
+      h: 'wanxue',
+      p: 5,
     };
-    if (!url.startsWith('/login') || !url.startsWith('/register')) {
-      console.log(!config.headers.t, '!config.headers.t1');
+    //当请求路径不是这两个的时候, 添加token请求头
+    config.headers.t = sessionStorage.getItem('token') || '';
+    if (!url.startsWith('/login')) {
       if (!config.headers.t) {
-        // router.history.push('/login');
         history.replace('/login');
-      } else {
-        //当请求路径不是这两个的时候, 添加token请求头
-        config.headers.t = localStorage.getItem('token');
       }
     }
     return config;

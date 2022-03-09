@@ -1,7 +1,7 @@
 import http from '../../request/index';
 
-function getTestInfo(query) {
-  return http('get', 'evaluate/v1/evaluate/', query);
+function getTestInfo(id) {
+  return http('get', 'evaluate/v1/evaluate/' + id);
 }
 
 export { getTestInfo };
