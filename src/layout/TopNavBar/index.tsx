@@ -15,10 +15,6 @@ const TopNavBar = (props: { title: string }) => {
   );
   const back = () => {
     nav(-1);
-    Toast.show({
-      content: '点击了返回区域',
-      duration: 1000,
-    });
   };
 
   return (

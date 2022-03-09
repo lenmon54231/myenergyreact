@@ -39,7 +39,7 @@ const HighLevelTest = () => {
   }, []);
   return (
     <div>
-      <TopNavBar></TopNavBar>
+      <TopNavBar title={''}></TopNavBar>
       <div className={styles.mainTestInfoContainer}>
         <div className={styles.topTitleContainer}>
           <div className="text-base font-bold">{testInfo?.name}</div>
