@@ -26,7 +26,7 @@ const Home = () => {
   }, []);
   return (
     <div>
-      <TopNavBar />
+      <TopNavBar title="我的能量" />
       <div className={styles.main}>
         {testList.map((e) => {
           return <BigTest key={e?.id} testInfo={e} />;
