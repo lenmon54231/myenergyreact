@@ -3,7 +3,8 @@ import { getHomeTestList } from '@/api/home/index';
 import styles from './index.module.less';
 import TopNavBar from '@/layout/TopNavBar';
 import BigTest from '@/components/BigTest/index';
-
+import { Button } from 'antd-mobile';
+import { useNavigate } from 'react-router-dom';
 type testListSingle = {
   detailIntro: string;
   evaluateType: number;
@@ -18,7 +19,7 @@ type testList = Array<testListSingle>;
 
 const Home = () => {
   const [testList, setTestList] = useState<testList>([]);
-
+  const nav = useNavigate();
   useEffect(() => {
     getHomeTestList().then((res) => {
       setTestList([...testList, ...res?.result]);
@@ -31,6 +32,13 @@ const Home = () => {
         {testList.map((e) => {
           return <BigTest key={e?.id} testInfo={e} />;
         })}
+      </div>
+      <div className={styles.footerContainer}>
+        <div className={styles.buttonContainer}>
+          <Button block color="primary" onClick={() => nav('/myReport')}>
+            我的报告
+          </Button>
+        </div>
       </div>
       {/* <LoadingView /> */}
     </div>

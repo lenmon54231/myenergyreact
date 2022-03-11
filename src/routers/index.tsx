@@ -1,11 +1,3 @@
-/*
- * @Descripttion:
- * @version:
- * @Author: 小白
- * @Date: 2020-10-05 22:06:34
- * @LastEditors: 小白
- * @LastEditTime: 2022-02-17 00:14:09
- */
 import { White } from '@/typings';
 import { lazy } from 'react';
 const Search = lazy(() => import(/* chunkName: "Search" */ '@/pages/Search'));
@@ -16,6 +8,7 @@ const Index = lazy(() => import(/* chunkName: Index */ '@/pages/Index'));
 const Other = lazy(() => import(/* chunkName: Other */ '@/pages/Other'));
 const Other1 = lazy(() => import(/* chunkName: Other1 */ '@/pages/Other1'));
 const Login = lazy(() => import('@/pages/Login'));
+const MyReport = lazy(() => import('@/pages/MyReport'));
 const HighLevelTest = lazy(
   () => import(/* chunkName: highLevelTest */ '@/pages/highLevelTest'),
 );
@@ -55,6 +48,10 @@ export const TabBarList: White.RouteTabBar[] = [
 
 const routes: White.RouteConfig[] = [
   {
+    path: '*',
+    component: NoFound,
+  },
+  {
     path: '/',
     component: Index,
     tabBars: TabBarList,
@@ -81,8 +78,8 @@ const routes: White.RouteConfig[] = [
     component: Login,
   },
   {
-    path: '*',
-    component: NoFound,
+    path: '/myReport',
+    component: MyReport,
   },
 ];
 
