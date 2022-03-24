@@ -15,6 +15,13 @@ const HighLevelTest = lazy(
 const NoFound = lazy(
   () => import(/* chunkName: NoFound */ '../components/NoFound'),
 );
+
+// 测试验证专用
+const Test = lazy(() => import('@/pages/Test'));
+const UseMemo = lazy(() => import('@/pages/Test/UseMemo'));
+const Slug = lazy(() => import('@/pages/Test/Slug'));
+// 测试验证专用
+
 export const TabBarList: White.RouteTabBar[] = [
   {
     path: '/',
@@ -80,6 +87,20 @@ const routes: White.RouteConfig[] = [
   {
     path: '/myReport',
     component: MyReport,
+  },
+  {
+    path: '/test',
+    component: Test,
+    childrenList: [
+      {
+        path: '/test/useMemo',
+        component: UseMemo,
+      },
+      {
+        path: '/test/:slug',
+        component: Slug,
+      },
+    ],
   },
 ];
 

@@ -11,7 +11,7 @@
     "build:dev": "vite build --mode dev",
     "build:prod": "vite build --mode prod",
     "build:pre": "vite build --mode pre",
-    "serve": "vite preview",
+    "serve": "vite --mode dev",
     "precommit": "lint-staged",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "prettier": "prettier -c --write 'src/*'",
@@ -58,7 +58,9 @@
     "react-dom": "^16.8.0",
     "react-router-dom": "^6.0.2",
     "react-transition-group": "^4.4.2",
-    "rmox": "^1.0.6"
+    "rmox": "^1.0.6",
+    "shelljs": "^0.8.5",
+    "commander": "^9.1.0"
   },
   "devDependencies": {
     "@testing-library/react": "^12.1.0",

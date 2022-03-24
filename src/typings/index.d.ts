@@ -20,6 +20,7 @@ export namespace White {
     title: string;
   };
   export interface RouteConfig extends RouteProps {
+    childrenList?: RouteConfig[]; // 子列表
     routes?: RouteConfig[]; // 子列表
     tabBars?: (RouteConfig & TabBarType)[];
     isTabIndex?: boolean;

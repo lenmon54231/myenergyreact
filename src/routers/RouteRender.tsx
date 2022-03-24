@@ -12,10 +12,14 @@ const generateRoute = ({
   path,
   component: Component,
   tabBars,
+  childrenList,
   ...other
 }: White.RouteConfig) => (
   <Route path={path} key={path} element={<Component />} {...other}>
     {(routes || tabBars)?.map((v) => generateRoute(v))}
+    {childrenList
+      ? childrenList?.map((v: White.RouteConfig) => generateRoute(v))
+      : ''}
   </Route>
 );
 let isStart = false;
@@ -27,7 +31,10 @@ const handler = (e: any) => {
 const RouteRender = () => {
   const { classNames, primaryKey, location } = useSwitch();
   const routesView = useMemo(() => {
-    return routes.map((v) => generateRoute(v));
+    return routes.map((v) => {
+      console.log('v: ', v);
+      return generateRoute(v);
+    });
   }, []);
   useLayoutEffect(() => {
     document.removeEventListener('click', handler, true);

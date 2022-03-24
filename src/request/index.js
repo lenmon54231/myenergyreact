@@ -21,7 +21,7 @@ axios.interceptors.request.use(
     };
     //当请求路径不是这两个的时候, 添加token请求头
     config.headers.t = sessionStorage.getItem('token') || '';
-    if (!url.startsWith('/login')) {
+    if (!url.startsWith('/login') && !url.startsWith('/test')) {
       if (!config.headers.t) {
         history.replace('/login');
       }
