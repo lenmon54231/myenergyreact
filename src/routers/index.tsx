@@ -15,6 +15,7 @@ const HighLevelTest = lazy(
 const NoFound = lazy(
   () => import(/* chunkName: NoFound */ '../components/NoFound'),
 );
+const AnswerPage = lazy(() => import('@/pages/AnswerPage'));
 
 // 测试验证专用
 const Test = lazy(() => import('@/pages/Test'));
@@ -87,6 +88,10 @@ const routes: White.RouteConfig[] = [
   {
     path: '/myReport',
     component: MyReport,
+  },
+  {
+    path: '/answerPage',
+    component: AnswerPage,
   },
   {
     path: '/test',

@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import TopNavBar from '@/layout/TopNavBar';
-import { useLocation } from 'react-router-dom';
+import { To, useLocation, useNavigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import { getTestInfo } from '@/api/testInfo/index';
 import styles from './index.module.less';
@@ -18,6 +18,7 @@ interface testInfo {
 
 const HighLevelTest = () => {
   const location = useLocation();
+  const nav = useNavigate();
   console.log(location.state);
   const [searchParams, setSearchParams] = useSearchParams();
   const [testInfo, setTestInfo] = useState<testInfo>({
@@ -37,6 +38,9 @@ const HighLevelTest = () => {
     };
     getInfo();
   }, []);
+  const goToTest = (path: To) => {
+    nav(path);
+  };
   return (
     <div>
       <TopNavBar title={''}></TopNavBar>
@@ -68,7 +72,9 @@ const HighLevelTest = () => {
         </div>
       </div>
       <div className={styles.footerContainer}>
-        <div className={styles.buttonContainer}>
+        <div
+          className={styles.buttonContainer}
+          onClick={() => goToTest('/answerPage')}>
           <Button block color="primary">
             进入测评
           </Button>

@@ -8,3 +8,4 @@ yarn-error.log*
 *.zip
 yarn-error.log
 .eslintcache
+.history
