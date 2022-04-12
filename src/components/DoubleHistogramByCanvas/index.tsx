@@ -13,7 +13,7 @@ const DoubleHistogramByCanvas = (props) => {
       height: 250,
       root: root,
       setting: config,
-      onEmit: (data) => emit('onSelect', data),
+      onEmit: (data: any) => emit('onSelect', data),
     });
     drawPieChart.init();
   }, []);

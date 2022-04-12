@@ -150,6 +150,7 @@ export default class DoubleBarChart {
       y: y,
       width: 10,
       height: height,
+      // height: 0,
       radius: {
         tl: 2, // 左上
         tr: 2, // 右上
@@ -159,6 +160,7 @@ export default class DoubleBarChart {
       color: item.scoreColor,
     });
     this.stage.addChild(rect);
+    this.addAnimation(x, this.paddingTop, this.totalHeight - height);
   }
   // 画当前分
   drawCurrentRectangle(item, index) {
@@ -181,7 +183,9 @@ export default class DoubleBarChart {
       },
       color: item.color,
     });
+
     this.stage.addChild(rect);
+    this.addAnimation(x, this.paddingTop, this.totalHeight - height);
   }
   // 画通过率线
   drawPassLine(item, index) {
@@ -193,12 +197,18 @@ export default class DoubleBarChart {
     const rightX = this.paddingLeft + 25 + index * 40 + this.itemPadding;
     const polyline = this.stage.graphs.line({
       matrix: [
-        [leftX, Y],
-        [rightX, Y],
+        [leftX - 20, Y],
+        [rightX - 20, Y],
+        // [rightX, Y],
+        // [0, Y],
       ],
       color: item.passColor,
       lineWidth: 4,
       dash: [4],
+    });
+
+    polyline.animateTo({
+      moveX: 20,
     });
     this.stage.addChild(polyline);
   }
@@ -215,5 +225,26 @@ export default class DoubleBarChart {
       fontSize: 8,
     });
     this.stage.addChild(text);
+  }
+  // 添加白色柱状图，以实现动画
+  addAnimation(x, y, height) {
+    const whiteRect = this.stage.graphs.rectangle({
+      x: x,
+      y: this.paddingTop,
+      width: 10,
+      height: this.totalHeight,
+      radius: {
+        tl: 2, // 左上
+        tr: 2, // 右上
+        bl: 0, // 左下
+        br: 0, // 右下
+      },
+      color: '#fff',
+    });
+    whiteRect.animateTo({
+      y: y,
+      height: height,
+    });
+    this.stage.addChild(whiteRect);
   }
 }

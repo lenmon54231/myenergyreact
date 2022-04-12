@@ -2,7 +2,7 @@ export const canvasData = [
   {
     id: 1,
     title: '多元学科通识',
-    color: 'rgba(255, 198, 50, 0.1)',
+    color: 'rgba(255, 198, 50, 0.4)',
     pass: 1,
     passColor: 'rgba(255, 198, 50, 0.4)',
     total: 2,
@@ -12,7 +12,7 @@ export const canvasData = [
   {
     id: 2, // 当前项的id
     title: '外语能力', // 当前项的名字
-    color: 'rgba(255, 198, 50, 0.1)', // 底色
+    color: 'rgba(255, 198, 50, 0.4)', // 底色
     pass: 7, // 及格
     passColor: 'rgba(255, 198, 50, 0.4)', // 及格颜色
     total: 10, // 满分
@@ -22,7 +22,7 @@ export const canvasData = [
   {
     id: 3,
     title: '学术科研',
-    color: 'rgba(255, 198, 50, 0.1)',
+    color: 'rgba(255, 198, 50, 0.4)',
     pass: 6,
     passColor: 'rgba(255, 198, 50, 0.4)',
     total: 10,
@@ -32,7 +32,7 @@ export const canvasData = [
   {
     id: 4,
     title: '学习成绩',
-    color: 'rgba(255, 198, 50, 0.1)',
+    color: 'rgba(255, 198, 50, 0.4)',
     pass: 7,
     passColor: 'rgba(255, 198, 50, 0.4)',
     total: 10,
@@ -42,7 +42,7 @@ export const canvasData = [
   {
     id: 5,
     title: '学历层次',
-    color: 'rgba(255, 198, 50, 0.1)',
+    color: 'rgba(255, 198, 50, 0.4)',
     pass: 7,
     passColor: 'rgba(255, 198, 50, 0.4)',
     total: 10,
@@ -52,7 +52,7 @@ export const canvasData = [
   {
     id: 6,
     title: '学校档次',
-    color: 'rgba(255, 198, 50, 0.1)',
+    color: 'rgba(255, 198, 50, 0.4)',
     pass: 7,
     passColor: 'rgba(255, 198, 50, 0.4)',
     total: 10,
@@ -62,7 +62,7 @@ export const canvasData = [
   {
     id: 7,
     title: '行业专属职务能力',
-    color: 'rgba(255, 97, 163, 0.1)',
+    color: 'rgba(255, 97, 163, 0.4)',
     pass: 7,
     passColor: 'rgba(255, 97, 163, 0.4)',
     total: 10,
@@ -72,7 +72,7 @@ export const canvasData = [
   {
     id: 8,
     title: '行业通用职务能力',
-    color: 'rgba(255, 97, 163, 0.1)',
+    color: 'rgba(255, 97, 163, 0.4)',
     pass: 7,
     passColor: 'rgba(255, 97, 163, 0.4)',
     total: 20,
@@ -82,7 +82,7 @@ export const canvasData = [
   {
     id: 9,
     title: '语言表达能力',
-    color: 'rgba(76, 169, 255, 0.1)',
+    color: 'rgba(76, 169, 255, 0.4)',
     pass: 7,
     passColor: 'rgba(76, 169, 255, 0.4)',
     total: 10,
@@ -92,7 +92,7 @@ export const canvasData = [
   {
     id: 10,
     title: '人格魅力',
-    color: 'rgba(76, 169, 255, 0.1)',
+    color: 'rgba(76, 169, 255, 0.4)',
     pass: 7,
     passColor: 'rgba(76, 169, 255, 0.4)',
     total: 10,
@@ -102,7 +102,7 @@ export const canvasData = [
   {
     id: 11,
     title: '复杂任务执行能力',
-    color: 'rgba(76, 169, 255, 0.1)',
+    color: 'rgba(76, 169, 255, 0.4)',
     pass: 7,
     passColor: 'rgba(76, 169, 255, 0.4)',
     total: 10,
@@ -112,7 +112,7 @@ export const canvasData = [
   {
     id: 12,
     title: '复杂任务领导能力',
-    color: 'rgba(76, 169, 255, 0.1)',
+    color: 'rgba(76, 169, 255, 0.4)',
     pass: 7,
     passColor: 'rgba(76, 169, 255, 0.4)',
     total: 10,
@@ -122,7 +122,7 @@ export const canvasData = [
   {
     id: 13,
     title: '思维能力',
-    color: 'rgba(76, 169, 255, 0.1)',
+    color: 'rgba(76, 169, 255, 0.4)',
     pass: 7,
     passColor: 'rgba(76, 169, 255, 0.4)',
     total: 10,
@@ -132,7 +132,7 @@ export const canvasData = [
   {
     id: 14,
     title: '心理能量',
-    color: 'rgba(76, 169, 255, 0.1)',
+    color: 'rgba(76, 169, 255, 0.4)',
     pass: 7,
     passColor: 'rgba(76, 169, 255, 0.4)',
     total: 10,
@@ -142,7 +142,7 @@ export const canvasData = [
   {
     id: 15,
     title: '性格适配度',
-    color: 'rgba(76, 169, 255, 0.1)',
+    color: 'rgba(76, 169, 255, 0.4)',
     pass: 7,
     passColor: 'rgba(76, 169, 255, 0.4)',
     total: 10,
@@ -152,7 +152,7 @@ export const canvasData = [
   {
     id: 16,
     title: '形体魅力',
-    color: 'rgba(76, 169, 255, 0.1)',
+    color: 'rgba(76, 169, 255, 0.4)',
     pass: 7,
     passColor: 'rgba(76, 169, 255, 0.4)',
     total: 10,
@@ -162,7 +162,7 @@ export const canvasData = [
   {
     id: 17,
     title: '活动成果',
-    color: 'rgba(76, 169, 255, 0.1)',
+    color: 'rgba(76, 169, 255, 0.4)',
     pass: 7,
     passColor: 'rgba(76, 169, 255, 0.4)',
     total: 10,
@@ -172,7 +172,7 @@ export const canvasData = [
   {
     id: 18,
     title: '社团职务',
-    color: 'rgba(76, 169, 255, 0.1)',
+    color: 'rgba(76, 169, 255, 0.4)',
     pass: 7,
     passColor: 'rgba(76, 169, 255, 0.4)',
     total: 10,
