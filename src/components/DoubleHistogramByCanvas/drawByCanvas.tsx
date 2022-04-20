@@ -28,7 +28,14 @@ export default class DoubleBarChart {
   private totalHeight = 0; //坐标系（双柱状图）的高度
   private itemPadding = 20; // 每个柱形之间的间隔
 
-  constructor(options) {
+  constructor(options: {
+    data: any;
+    width: any;
+    height: any;
+    root: any;
+    setting: any;
+    onEmit: any;
+  }) {
     const { data, width, height, root, setting, onEmit } = options;
     this.root = root; // w: canvas 父级元素
     this.width = width;
@@ -41,7 +48,7 @@ export default class DoubleBarChart {
     this.data = data;
     this.setting = setting;
     this.onEmit = onEmit;
-    this.stage = window.omg({
+    this.stage = (window as any)?.omg({
       element: document.getElementById('canvas'),
       width: this.width,
       height: this.height,
@@ -141,7 +148,7 @@ export default class DoubleBarChart {
     this.stage.addChild(polyline);
   }
   // 画总分
-  drawTotalRectangle(item, index) {
+  drawTotalRectangle(item: dataObject, index: number) {
     const x = this.paddingLeft + index * 40 + this.itemPadding; // 矩形的起始X坐标
     const height = this.totalHeight * (item.total / this.maxTotal); // 矩形的高度
     const y = this.paddingTop + this.totalHeight - height; // 矩形的起始Y坐标
@@ -163,7 +170,7 @@ export default class DoubleBarChart {
     this.addAnimation(x, this.paddingTop, this.totalHeight - height);
   }
   // 画当前分
-  drawCurrentRectangle(item, index) {
+  drawCurrentRectangle(item: dataObject, index: number) {
     const x = this.paddingLeft + 10 + index * 40 + this.itemPadding;
     const height =
       this.totalHeight *
@@ -188,7 +195,7 @@ export default class DoubleBarChart {
     this.addAnimation(x, this.paddingTop, this.totalHeight - height);
   }
   // 画通过率线
-  drawPassLine(item, index) {
+  drawPassLine(item: dataObject, index: number) {
     const leftX = this.paddingLeft - 5 + index * 40 + this.itemPadding;
     const Y =
       this.paddingTop +
@@ -213,7 +220,7 @@ export default class DoubleBarChart {
     this.stage.addChild(polyline);
   }
   // 画标题
-  drawTitle(item, index) {
+  drawTitle(item: dataObject, index: number) {
     const x = this.paddingLeft + index * 40 + this.itemPadding - 25;
     const y = this.paddingTop + this.totalHeight + 5;
     const text = this.stage.graphs.text({
@@ -227,7 +234,7 @@ export default class DoubleBarChart {
     this.stage.addChild(text);
   }
   // 添加白色柱状图，以实现动画
-  addAnimation(x, y, height) {
+  addAnimation(x: number, y: number, height: number) {
     const whiteRect = this.stage.graphs.rectangle({
       x: x,
       y: this.paddingTop,
