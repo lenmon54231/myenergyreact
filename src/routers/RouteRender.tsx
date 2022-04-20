@@ -32,7 +32,6 @@ const RouteRender = () => {
   const { classNames, primaryKey, location } = useSwitch();
   const routesView = useMemo(() => {
     return routes.map((v) => {
-      console.log('v: ', v);
       return generateRoute(v);
     });
   }, []);

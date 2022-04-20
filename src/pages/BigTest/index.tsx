@@ -7,6 +7,7 @@ import styles from './index.module.less';
 import { Button } from 'antd-mobile';
 import DoubleTestCard from '@/components/DoubleTestCard/index';
 interface testInfo {
+  id: string;
   name: string;
   detailIntro: string;
   notes: string;
@@ -22,6 +23,7 @@ const HighLevelTest = () => {
   console.log(location.state);
   const [searchParams, setSearchParams] = useSearchParams();
   const [testInfo, setTestInfo] = useState<testInfo>({
+    id: '',
     name: '',
     detailIntro: '',
     notes: '',
@@ -39,7 +41,7 @@ const HighLevelTest = () => {
     getInfo();
   }, []);
   const goToTest = (path: To) => {
-    nav(path);
+    nav(path + '?id=' + testInfo?.id);
   };
   return (
     <div>

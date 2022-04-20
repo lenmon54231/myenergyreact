@@ -6,7 +6,7 @@ const BigTest = (props: { testInfo: any }) => {
   const nav = useNavigate();
   const testInfo = props.testInfo;
   const toPage = (evaluateType: number): void => {
-    nav(`/highLevelTest?id=${evaluateType}`, { state: { id: evaluateType } });
+    nav(`/BigTest?id=${evaluateType}`, { state: { id: evaluateType } });
   };
 
   return (
@@ -25,10 +25,7 @@ const BigTest = (props: { testInfo: any }) => {
           <img className={styles.img} src={testInfo?.img} alt="" />
         </div>
       ) : (
-        <DoubleTestCard
-          className="mb-1"
-          testChildrenInfo={testInfo?.children}
-        />
+        <DoubleTestCard testChildrenInfo={testInfo?.children} />
       )}
       <div>测试人数</div>
     </div>

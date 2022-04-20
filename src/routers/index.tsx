@@ -9,9 +9,7 @@ const Other = lazy(() => import(/* chunkName: Other */ '@/pages/Other'));
 const Other1 = lazy(() => import(/* chunkName: Other1 */ '@/pages/Other1'));
 const Login = lazy(() => import('@/pages/Login'));
 const MyReport = lazy(() => import('@/pages/MyReport'));
-const HighLevelTest = lazy(
-  () => import(/* chunkName: highLevelTest */ '@/pages/highLevelTest'),
-);
+const BigTest = lazy(() => import(/* chunkName: BigTest */ '@/pages/BigTest'));
 const NoFound = lazy(
   () => import(/* chunkName: NoFound */ '../components/NoFound'),
 );
@@ -78,8 +76,8 @@ const routes: White.RouteConfig[] = [
     component: Detail,
   },
   {
-    path: '/highLevelTest',
-    component: HighLevelTest,
+    path: '/BigTest',
+    component: BigTest,
   },
   {
     path: '/login',
