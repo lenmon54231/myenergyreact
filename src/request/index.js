@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Toast } from 'antd-mobile';
 import history from '@/utils/history';
-
+import { whiteUrlList } from './whiteUrlList';
 axios.defaults.timeout = 100000;
 axios.defaults.baseURL = 'https://alpha-puniversity.wanxue.cn/';
 
@@ -19,11 +19,16 @@ axios.interceptors.request.use(
       h: 'wanxue',
       p: 5,
     };
+
     //当请求路径不是这两个的时候, 添加token请求头
     config.headers.t = sessionStorage.getItem('token') || '';
-    if (!url.startsWith('/login') && !url.startsWith('/test')) {
+    if (whiteUrlList.findIndex((item) => item === url) === -1) {
       if (!config.headers.t) {
         history.replace('/login');
+        return Promise.reject({
+          data: '未登录',
+          code: 'unToken',
+        });
       }
     }
     return config;
@@ -38,13 +43,10 @@ axios.interceptors.request.use(
  */
 axios.interceptors.response.use(
   (response) => {
-    if (response.data.errCode === 2) {
-      console.log('过期');
-    }
     return response;
   },
   (error) => {
-    console.log('请求出错：', error);
+    return Promise.reject(error);
   },
 );
 
@@ -56,13 +58,11 @@ axios.interceptors.response.use(
  */
 export function get(url, params = {}) {
   return new Promise((resolve, reject) => {
-    console.log(params, url);
     axios
       .get(url, {
         params: params,
       })
       .then((response) => {
-        landing(url, params, response.data);
         resolve(response.data);
       })
       .catch((error) => {
@@ -105,7 +105,7 @@ export function patch(url, data = {}) {
         resolve(response.data);
       },
       (err) => {
-        msag(err);
+        msg(err);
         reject(err);
       },
     );
@@ -126,7 +126,7 @@ export function put(url, data = {}) {
         resolve(response.data);
       },
       (err) => {
-        msag(err);
+        msg(err);
         reject(err);
       },
     );
@@ -134,18 +134,16 @@ export function put(url, data = {}) {
 }
 
 // 统一接口处理，返回数据
-const http = (fecth, url, param) => {
+const http = (fetch, url, param) => {
   // let _data = ""
   return new Promise((resolve, reject) => {
-    switch (fecth) {
+    switch (fetch) {
       case 'get':
-        console.log('begin a get request,and url:', url);
         get(url, param)
           .then(function (response) {
             resolve(response);
           })
           .catch(function (error) {
-            console.log('get request GET failed.', error);
             reject(error);
           });
         break;
@@ -155,7 +153,6 @@ const http = (fecth, url, param) => {
             resolve(response);
           })
           .catch(function (error) {
-            console.log('get request POST failed.', error);
             reject(error);
           });
         break;
@@ -166,7 +163,7 @@ const http = (fecth, url, param) => {
 };
 
 // 失败提示
-function msag(err) {
+function msg(err) {
   if (err && err.response) {
     switch (err.response.status) {
       case 400:
@@ -213,18 +210,6 @@ function msag(err) {
         break;
       default:
     }
-  }
-}
-
-/**
- * 查看返回的数据
- * @param url
- * @param params
- * @param data
- */
-function landing(url, params, data) {
-  if (data.code === -1) {
-    Toast(data, 'data');
   }
 }
 

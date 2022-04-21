@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import SingleChoice from './singleChoice';
 import MultipleChoice from './multipleChoice';
 import GapFill from './gapFilling';
-const Answer = (props: { currentQuestion: any }) => {
+const Answer = (props) => {
   console.log(props?.currentQuestion, 'props?.currentQuestion');
   const [currentInfo, setCurrentInfo] = useState(props?.currentQuestion);
   // useEffect(() => {

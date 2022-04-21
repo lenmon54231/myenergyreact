@@ -22,13 +22,17 @@ const Home = () => {
 
   const nav = useNavigate();
   useEffect(() => {
-    getHomeTestList().then((res) => {
-      console.log('res: ', res);
-      if (res.status === 200) {
-        testList.length = 0;
-        setTestList([...testList, ...res?.result]);
-      }
-    });
+    getHomeTestList()
+      .then((res) => {
+        console.log('res: ', res);
+        if (res.status === 200) {
+          testList.length = 0;
+          setTestList([...testList, ...res?.result]);
+        }
+      })
+      .catch((err) => {
+        console.log('err: ', err);
+      });
   }, []);
   return (
     <div>
