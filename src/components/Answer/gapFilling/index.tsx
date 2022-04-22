@@ -1,33 +1,46 @@
 import { SearchBar, Toast, CheckList, DotLoading } from 'antd-mobile';
 import { SearchBarRef } from 'antd-mobile/es/components/search-bar';
-import { useRef, useContext, useState, useCallback } from 'react';
+import { useRef, useContext, useState, useCallback, useEffect } from 'react';
 import { InitContext } from '@/pages/AnswerPage/index';
 import { getSchoolListByKeyWord } from '@/api/answer/index';
 import debounce from 'lodash/debounce';
 
-const GapFill = (props: any) => {
+const GapFill = () => {
+  const { result, setResult, currentQuestion } = useContext(InitContext);
+
   const searchRef = useRef<SearchBarRef>(null);
-  const { result, setResult } = useContext(InitContext);
   const [isShowCheckList, setIsShowCheckList] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [schoolSearchList, setSchoolSearchList] = useState([]);
+  const [searchBarValue, setSearchBarValue] = useState('');
+
+  useEffect(() => {
+    setSearchBarValue(
+      result[currentQuestion?.questionNum - 1]?.result &&
+        JSON.parse(result[currentQuestion?.questionNum - 1]?.result)?.name,
+    );
+  }, [currentQuestion?.questionNum]);
+
+  const initSearchList = () => {
+    setIsLoading(false);
+    setIsShowCheckList(false);
+    setSchoolSearchList([]);
+  };
   const load = useCallback(
-    debounce((p: string) => updateSearchList(p), 800),
+    debounce((p) => updateSearchList(p), 800),
     [],
   );
-  const updateSearchList = async (value: string) => {
+  const updateSearchList = async (value) => {
     if (value) {
       const res = await getSchoolListByKeyWord({
-        id: props.currentQuestion?.options[0]?.id,
+        id: currentQuestion?.options[0]?.id,
         key: value,
         optionsType: '1',
       });
       if (res.status === 200) {
         if (res.result.length === 0) {
           Toast.show('没有搜索到相关内容');
-          setIsLoading(false);
-          setIsShowCheckList(false);
-          setSchoolSearchList([]);
+          initSearchList();
         } else {
           setIsLoading(false);
           setSchoolSearchList(res.result);
@@ -35,48 +48,50 @@ const GapFill = (props: any) => {
         }
       }
     } else {
-      setIsLoading(false);
-      setIsShowCheckList(false);
-      setSchoolSearchList([]);
+      initSearchList();
     }
   };
 
-  const getSearchResult = async (value: string) => {
+  const getSearchResult = async (value) => {
     value && setIsLoading(true);
     load(value);
   };
 
-  const choseAnswer = (value: string[]) => {
-    console.log('value: ', value[0]);
+  const choseAnswer = (value) => {
+    console.log('value: ', currentQuestion, value);
     let obj = {
-      questionId: '1111',
-      optionsId: '2222',
-      result: value[0],
-      questionNumber: 1,
+      optionsId: currentQuestion.options[0].id,
+      questionId: currentQuestion?.id,
+      result: JSON.stringify(value[0]),
+      questionNumber: currentQuestion?.questionNum,
+      isFilterResult: 'id', // 只保留result中的id
     };
-    let arr = [...result, obj];
-    setResult && setResult(arr);
+    let arr = [...result];
+    if (currentQuestion?.questionNum > result.length) {
+      arr.push(obj);
+    } else {
+      arr.splice(currentQuestion.questionNum - 1, 1, obj);
+    }
+
+    console.log('obj: ', obj, arr);
+    setSearchBarValue(value[0].name);
+    setResult(arr);
+    setTimeout(() => {
+      initSearchList();
+    }, 300);
   };
 
   return (
     <div>
       <SearchBar
+        value={searchBarValue}
         ref={searchRef}
         placeholder="请输入内容"
         style={{ '--background': '#ffffff' }}
         showCancelButton
-        onSearch={(val) => {
-          Toast.show(`你搜索了：${val}`);
-        }}
-        onFocus={() => {}}
         onChange={(val) => {
+          console.log('val: ', val);
           getSearchResult(val);
-        }}
-        onClear={() => {
-          Toast.show('清空内容');
-        }}
-        onCancel={() => {
-          Toast.show('取消搜索');
         }}
       />
       {isShowCheckList ? (
@@ -84,9 +99,9 @@ const GapFill = (props: any) => {
           onChange={(val) => {
             choseAnswer(val);
           }}>
-          {schoolSearchList.map((item: any) => {
+          {schoolSearchList.map((item) => {
             return (
-              <CheckList.Item value={item.name} key={item.id}>
+              <CheckList.Item value={item} key={item.id}>
                 {item.name}
               </CheckList.Item>
             );

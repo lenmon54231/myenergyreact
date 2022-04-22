@@ -1,7 +1,7 @@
 import { NavBar, Button } from 'antd-mobile';
 import Answer from '@/components/Answer';
 import { getQuestionInfo } from '@/api/answer/index';
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState, createContext, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styles from './index.module.less';
 import {
@@ -11,11 +11,14 @@ import {
 } from './type';
 
 const result: never[] = [];
-const setResult = null;
-
+const setResult = () => {};
+const currentQuestion: typeCurrentQuestion = { questionNum: 1 };
+const setCurrentQuestion = () => {};
 const resultContext: interfaceResultContext = {
   result,
   setResult: (result: Array<typeResult>) => {},
+  currentQuestion,
+  setCurrentQuestion: (object: typeCurrentQuestion) => {},
 };
 export const InitContext = createContext(resultContext);
 
@@ -26,10 +29,10 @@ const AnswerPage = () => {
     [] as Array<typeCurrentQuestion>,
   ); //所有试题列表
   const [searchParams, setSearchParams] = useSearchParams(); // 获取路由参数
-  const [currentQuestion, setCurrentQuestion] = useState(
-    {} as typeCurrentQuestion,
-  ); // 当前题目
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(1); // 当前题目索引
+  const [currentQuestion, setCurrentQuestion] = useState({
+    questionNum: 1,
+  } as typeCurrentQuestion); // 当前题目
+
   useEffect(() => {
     getQuestionInfo({
       id: searchParams.get('id'),
@@ -42,22 +45,27 @@ const AnswerPage = () => {
     });
   }, []);
 
+  const submitAnswer = () => {
+    console.log(result, 'result');
+  };
+
   const changeCurrentQuestion = (action: string) => {
     const index = questionList.findIndex(
       (item) => item.id === currentQuestion.id,
     );
-    if (action === 'next') {
-      if (index === questionList.length - 1) {
-        setCurrentQuestionIndex(index + 1);
-        return;
-      } else {
-        setCurrentQuestionIndex(index + 2);
-        setCurrentQuestion(questionList[index + 1]);
+    console.log('index: ', index);
+
+    if (index === questionList.length) {
+      submitAnswer();
+    } else {
+      if (action === 'next') {
+        if (index !== questionList.length - 1) {
+          setCurrentQuestion(questionList[index + 1]);
+        }
       }
-    }
-    if (action === 'prev') {
-      setCurrentQuestionIndex(index);
-      setCurrentQuestion(questionList[index - 1]);
+      if (action === 'prev') {
+        setCurrentQuestion(questionList[index - 1]);
+      }
     }
   };
 
@@ -67,12 +75,14 @@ const AnswerPage = () => {
       value={{
         result,
         setResult,
+        currentQuestion,
+        setCurrentQuestion,
       }}>
       <div>
         <NavBar>答题页</NavBar>
-        <Answer currentQuestion={currentQuestion}></Answer>
+        <Answer></Answer>
         <div className={styles.footerContainer}>
-          {currentQuestionIndex > 1 ? (
+          {(currentQuestion?.questionNum as number) > 1 ? (
             <div className={styles.buttonContainer}>
               <Button
                 block
@@ -88,8 +98,15 @@ const AnswerPage = () => {
             <Button
               block
               color="primary"
+              disabled={
+                result[(currentQuestion?.questionNum as number) - 1]?.result
+                  ? false
+                  : true
+              }
               onClick={() => changeCurrentQuestion('next')}>
-              下一题
+              {currentQuestion?.questionNum === questionList.length
+                ? '提交'
+                : '下一题'}
             </Button>
           </div>
         </div>
