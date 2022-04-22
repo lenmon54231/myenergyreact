@@ -1,14 +1,53 @@
-import { Button, SearchBar, Space, Toast, CheckList } from 'antd-mobile';
+import { SearchBar, Toast, CheckList, DotLoading } from 'antd-mobile';
 import { SearchBarRef } from 'antd-mobile/es/components/search-bar';
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useState, useCallback } from 'react';
 import { InitContext } from '@/pages/AnswerPage/index';
-const GapFill = () => {
+import { getSchoolListByKeyWord } from '@/api/answer/index';
+import debounce from 'lodash/debounce';
+
+const GapFill = (props: any) => {
   const searchRef = useRef<SearchBarRef>(null);
   const { result, setResult } = useContext(InitContext);
-  const getSearchResult = (value: string) => {};
+  const [isShowCheckList, setIsShowCheckList] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [schoolSearchList, setSchoolSearchList] = useState([]);
+  const load = useCallback(
+    debounce((p: string) => updateSearchList(p), 800),
+    [],
+  );
+  const updateSearchList = async (value: string) => {
+    if (value) {
+      const res = await getSchoolListByKeyWord({
+        id: props.currentQuestion?.options[0]?.id,
+        key: value,
+        optionsType: '1',
+      });
+      if (res.status === 200) {
+        if (res.result.length === 0) {
+          Toast.show('没有搜索到相关内容');
+          setIsLoading(false);
+          setIsShowCheckList(false);
+          setSchoolSearchList([]);
+        } else {
+          setIsLoading(false);
+          setSchoolSearchList(res.result);
+          setIsShowCheckList(true);
+        }
+      }
+    } else {
+      setIsLoading(false);
+      setIsShowCheckList(false);
+      setSchoolSearchList([]);
+    }
+  };
+
+  const getSearchResult = async (value: string) => {
+    value && setIsLoading(true);
+    load(value);
+  };
+
   const choseAnswer = (value: string[]) => {
     console.log('value: ', value[0]);
-    console.log(result, 'result');
     let obj = {
       questionId: '1111',
       optionsId: '2222',
@@ -18,6 +57,7 @@ const GapFill = () => {
     let arr = [...result, obj];
     setResult && setResult(arr);
   };
+
   return (
     <div>
       <SearchBar
@@ -28,6 +68,7 @@ const GapFill = () => {
         onSearch={(val) => {
           Toast.show(`你搜索了：${val}`);
         }}
+        onFocus={() => {}}
         onChange={(val) => {
           getSearchResult(val);
         }}
@@ -38,16 +79,28 @@ const GapFill = () => {
           Toast.show('取消搜索');
         }}
       />
-      <CheckList
-        defaultValue={['B']}
-        onChange={(val) => {
-          choseAnswer(val);
-        }}>
-        <CheckList.Item value="A">A</CheckList.Item>
-        <CheckList.Item value="B">B</CheckList.Item>
-        <CheckList.Item value="C">C</CheckList.Item>
-        <CheckList.Item value="D">D</CheckList.Item>
-      </CheckList>
+      {isShowCheckList ? (
+        <CheckList
+          onChange={(val) => {
+            choseAnswer(val);
+          }}>
+          {schoolSearchList.map((item: any) => {
+            return (
+              <CheckList.Item value={item.name} key={item.id}>
+                {item.name}
+              </CheckList.Item>
+            );
+          })}
+        </CheckList>
+      ) : isLoading ? (
+        <div className="flex justify-center mt-4">
+          <span style={{ fontSize: 24 }}>
+            <DotLoading />
+          </span>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

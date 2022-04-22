@@ -4,7 +4,7 @@ import { getQuestionInfo } from '@/api/answer/index';
 import { useEffect, useState, createContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styles from './index.module.less';
-import type {
+import {
   typeCurrentQuestion,
   typeResult,
   interfaceResultContext,
