@@ -1,12 +1,18 @@
-// import { Dispatch, SetStateAction } from 'react';
+export type questionOption = {
+  code: string;
+  content: string;
+  id: string;
+  images: string;
+  isOption: number;
+};
 
 export type typeCurrentQuestion = {
-  id?: string;
-  questionNum?: number;
-  type?: number;
-  title?: string;
-  questionPaperId?: string;
-  options?: string[];
+  id: string;
+  questionNum: number;
+  type: number;
+  title: string;
+  questionPaperId: string;
+  options: Array<questionOption>;
 };
 
 export type typeResult = {

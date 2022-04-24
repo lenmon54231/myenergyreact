@@ -4,6 +4,7 @@ import { useRef, useContext, useState, useCallback, useEffect } from 'react';
 import { InitContext } from '@/pages/AnswerPage/index';
 import { getSchoolListByKeyWord } from '@/api/answer/index';
 import debounce from 'lodash/debounce';
+import { saveResult } from '../useData/index';
 
 const GapFill = () => {
   const { result, setResult, currentQuestion, setIsSubmitButtonDisabled } =
@@ -60,24 +61,9 @@ const GapFill = () => {
 
   const choseAnswer = (value) => {
     console.log('value: ', currentQuestion, value);
-    let obj = {
-      optionsId: currentQuestion.options[0].id,
-      questionId: currentQuestion?.id,
-      result: JSON.stringify(value[0]),
-      questionNumber: currentQuestion?.questionNum,
-      isFilterResult: 'id', // 只保留result中的id
-    };
-    let arr = [...result];
-    if (currentQuestion?.questionNum > result.length) {
-      arr.push(obj);
-    } else {
-      arr.splice(currentQuestion.questionNum - 1, 1, obj);
-    }
-
-    console.log('obj: ', obj, arr);
+    saveResult(value, result, setResult, currentQuestion);
     setSearchBarValue(value[0].name);
     setIsSubmitButtonDisabled(false);
-    setResult(arr);
     setTimeout(() => {
       initSearchList();
     }, 300);

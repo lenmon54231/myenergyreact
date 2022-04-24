@@ -12,15 +12,22 @@ import {
 
 const result: never[] = [];
 const setResult = () => {};
-const currentQuestion: typeCurrentQuestion = { questionNum: 1 };
+const currentQuestion: typeCurrentQuestion = {
+  id: '',
+  questionNum: 1,
+  type: 0,
+  title: '',
+  questionPaperId: '',
+  options: [],
+};
 const setCurrentQuestion = () => {};
 const isSubmitButtonDisabled = false;
 const setIsSubmitButtonDisabled = () => {};
 const resultContext: interfaceResultContext = {
   result,
-  setResult: (result: Array<typeResult>) => {},
+  setResult,
   currentQuestion,
-  setCurrentQuestion: (object: typeCurrentQuestion) => {},
+  setCurrentQuestion,
   isSubmitButtonDisabled,
   setIsSubmitButtonDisabled,
 };
@@ -33,9 +40,9 @@ const AnswerPage = () => {
     [] as Array<typeCurrentQuestion>,
   ); //所有试题列表
   const [searchParams, setSearchParams] = useSearchParams(); // 获取路由参数
-  const [currentQuestion, setCurrentQuestion] = useState({
-    questionNum: 1,
-  } as typeCurrentQuestion); // 当前题目
+  const [currentQuestion, setCurrentQuestion] = useState(
+    {} as typeCurrentQuestion,
+  ); // 当前题目
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false); // 提交按钮是否禁用
 
   useEffect(() => {
@@ -74,6 +81,17 @@ const AnswerPage = () => {
     }
   };
 
+  const checkFooterButtonStatus = () => {
+    let pass = false;
+    result.forEach((e) => {
+      console.log(e.questionId, currentQuestion.id);
+      if (e.questionId === currentQuestion.id) {
+        pass = true;
+      }
+    });
+    return pass;
+  };
+
   return (
     <InitContext.Provider
       // value就是通过context 共享的数据 这里是store
@@ -106,8 +124,7 @@ const AnswerPage = () => {
               block
               color="primary"
               disabled={
-                result[(currentQuestion?.questionNum as number) - 1]?.result &&
-                !isSubmitButtonDisabled
+                checkFooterButtonStatus() && !isSubmitButtonDisabled
                   ? false
                   : true
               }
