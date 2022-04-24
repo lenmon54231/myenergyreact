@@ -22,4 +22,6 @@ export interface interfaceResultContext {
   setResult: (result: Array<typeResult>) => void;
   currentQuestion: typeCurrentQuestion;
   setCurrentQuestion: (currentQuestion: typeCurrentQuestion) => void;
+  isSubmitButtonDisabled: boolean;
+  setIsSubmitButtonDisabled: (isSubmitButtonDisabled: boolean) => void;
 }

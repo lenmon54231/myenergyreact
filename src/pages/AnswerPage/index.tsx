@@ -14,11 +14,15 @@ const result: never[] = [];
 const setResult = () => {};
 const currentQuestion: typeCurrentQuestion = { questionNum: 1 };
 const setCurrentQuestion = () => {};
+const isSubmitButtonDisabled = false;
+const setIsSubmitButtonDisabled = () => {};
 const resultContext: interfaceResultContext = {
   result,
   setResult: (result: Array<typeResult>) => {},
   currentQuestion,
   setCurrentQuestion: (object: typeCurrentQuestion) => {},
+  isSubmitButtonDisabled,
+  setIsSubmitButtonDisabled,
 };
 export const InitContext = createContext(resultContext);
 
@@ -32,6 +36,7 @@ const AnswerPage = () => {
   const [currentQuestion, setCurrentQuestion] = useState({
     questionNum: 1,
   } as typeCurrentQuestion); // 当前题目
+  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false); // 提交按钮是否禁用
 
   useEffect(() => {
     getQuestionInfo({
@@ -77,6 +82,8 @@ const AnswerPage = () => {
         setResult,
         currentQuestion,
         setCurrentQuestion,
+        isSubmitButtonDisabled,
+        setIsSubmitButtonDisabled,
       }}>
       <div>
         <NavBar>答题页</NavBar>
@@ -99,7 +106,8 @@ const AnswerPage = () => {
               block
               color="primary"
               disabled={
-                result[(currentQuestion?.questionNum as number) - 1]?.result
+                result[(currentQuestion?.questionNum as number) - 1]?.result &&
+                !isSubmitButtonDisabled
                   ? false
                   : true
               }

@@ -6,7 +6,8 @@ import { getSchoolListByKeyWord } from '@/api/answer/index';
 import debounce from 'lodash/debounce';
 
 const GapFill = () => {
-  const { result, setResult, currentQuestion } = useContext(InitContext);
+  const { result, setResult, currentQuestion, setIsSubmitButtonDisabled } =
+    useContext(InitContext);
 
   const searchRef = useRef<SearchBarRef>(null);
   const [isShowCheckList, setIsShowCheckList] = useState(false);
@@ -75,6 +76,7 @@ const GapFill = () => {
 
     console.log('obj: ', obj, arr);
     setSearchBarValue(value[0].name);
+    setIsSubmitButtonDisabled(false);
     setResult(arr);
     setTimeout(() => {
       initSearchList();
@@ -91,6 +93,8 @@ const GapFill = () => {
         showCancelButton
         onChange={(val) => {
           console.log('val: ', val);
+          setSearchBarValue(val);
+          setIsSubmitButtonDisabled(true);
           getSearchResult(val);
         }}
       />
