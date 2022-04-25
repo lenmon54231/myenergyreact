@@ -52,7 +52,9 @@ const AnswerPage = () => {
       if (res.status === 200) {
         questionList.length = 0;
         setQuestionList(res?.result?.list);
-        setCurrentQuestion(res?.result?.list[0]);
+        // res.result.list[1].type = 2;
+        setCurrentQuestion(res?.result?.list[1]);
+        // setCurrentQuestion(res?.result?.list[0]);
       }
     });
   }, []);
