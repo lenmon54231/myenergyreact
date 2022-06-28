@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { canvasData, config } from './data';
 import Polygon from './drawByCanvas';
 
-const PolygonByCanvas = (props: any) => {
+const PolygonByCanvas = (props) => {
   console.log('props: ', props);
   const root = useRef(null);
 
@@ -13,7 +13,7 @@ const PolygonByCanvas = (props: any) => {
       height: 250,
       root: root,
       setting: config,
-      onEmit: (_data: any) => {},
+      onEmit: (_data) => {},
     });
     drawPieChart.init();
   }, []);
