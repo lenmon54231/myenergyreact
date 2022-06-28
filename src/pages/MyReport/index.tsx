@@ -3,6 +3,8 @@ import styles from './index.module.less';
 import G2DualAxes from '@/components/G2/Column/index';
 import DoubleHistogram from '@/components/DoubleHistogram/index';
 import DoubleHistogramByCanvas from '@/components/DoubleHistogramByCanvas/index';
+import Polygon from '@/components/Polygon/index';
+
 const MyReport = () => {
   return (
     <div>
@@ -10,7 +12,8 @@ const MyReport = () => {
       <div className={styles.chartContainer}>
         {/* <G2DualAxes></G2DualAxes> */}
         {/* <DoubleHistogram></DoubleHistogram> */}
-        <DoubleHistogramByCanvas> </DoubleHistogramByCanvas>
+        {/* <DoubleHistogramByCanvas> </DoubleHistogramByCanvas> */}
+        <Polygon></Polygon>
       </div>
     </div>
   );

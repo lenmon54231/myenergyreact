@@ -5,6 +5,8 @@ import TopNavBar from '@/layout/TopNavBar';
 import BigTest from '@/components/BigTest/index';
 import { Button } from 'antd-mobile';
 import { useNavigate } from 'react-router-dom';
+import { lengthOfLIS, selfCheck, selfCheck2 } from './tetched.js';
+
 type testListSingle = {
   detailIntro: string;
   evaluateType: number;
@@ -33,6 +35,9 @@ const Home = () => {
       .catch((err) => {
         console.log('err: ', err);
       });
+    // lengthOfLIS([9, 2, 5, 4, 3, 7]);
+    // selfCheck([9, 2, 5, 4, 3, 7]);
+    selfCheck2([9, 2, 5, 4, 3, 7]);
   }, []);
   return (
     <div>

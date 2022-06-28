@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { canvasData, config } from './data';
-import DoubleBarChart from './drawByCanvas';
+import Polygon from './drawByCanvas';
 
-const DoubleHistogramByCanvas = (props: any) => {
+const PolygonByCanvas = (props: any) => {
   console.log('props: ', props);
   const root = useRef(null);
 
   useEffect(() => {
-    const drawPieChart = new DoubleBarChart({
+    const drawPieChart = new Polygon({
       data: canvasData,
       width: 800,
       height: 250,
@@ -23,4 +23,4 @@ const DoubleHistogramByCanvas = (props: any) => {
     </div>
   );
 };
-export default DoubleHistogramByCanvas;
+export default PolygonByCanvas;
