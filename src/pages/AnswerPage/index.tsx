@@ -1,4 +1,4 @@
-import { NavBar, Button } from 'antd-mobile';
+import {  Button } from 'antd-mobile';
 import Answer from '@/components/Answer';
 import { getQuestionInfo } from '@/api/answer/index';
 import { useEffect, useState, createContext, useContext } from 'react';
@@ -9,7 +9,7 @@ import {
   typeResult,
   interfaceResultContext,
 } from './type';
-
+import TopNavBar from '@/layout/TopNavBar/index';
 const result: never[] = [];
 const setResult = () => {};
 const currentQuestion: typeCurrentQuestion = {
@@ -53,8 +53,8 @@ const AnswerPage = () => {
         questionList.length = 0;
         setQuestionList(res?.result?.list);
         // res.result.list[1].type = 2;
-        setCurrentQuestion(res?.result?.list[1]);
-        // setCurrentQuestion(res?.result?.list[0]);
+        // setCurrentQuestion(res?.result?.list[1]);
+        setCurrentQuestion(res?.result?.list[0]);
       }
     });
   }, []);
@@ -106,7 +106,7 @@ const AnswerPage = () => {
         setIsSubmitButtonDisabled,
       }}>
       <div>
-        <NavBar>答题页</NavBar>
+        <TopNavBar title='答题页'/> 
         <Answer></Answer>
         <div className={styles.footerContainer}>
           {(currentQuestion?.questionNum as number) > 1 ? (

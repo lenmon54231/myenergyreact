@@ -19,7 +19,7 @@ const CheckPhone = (props: any) => {
       </div>
       <div className="w-11/12 m-1">
         <Input
-          placeholder="请输入内容"
+          placeholder="请输入手机号"
           clearable
           onChange={(value) => {
             setUsePhoneNumber(value);

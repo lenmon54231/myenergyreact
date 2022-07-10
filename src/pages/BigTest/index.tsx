@@ -69,9 +69,11 @@ const HighLevelTest = () => {
             }}></div>
         </div>
         <div className={styles.doubleCardContainer}>
-          <DoubleTestCard
-            testChildrenInfo={testInfo?.children}></DoubleTestCard>
-        </div>
+          {
+            testInfo?.children?.length > 0 ? <DoubleTestCard
+            testChildrenInfo={testInfo?.children}></DoubleTestCard> : ''
+          }
+           </div>
       </div>
       <div className={styles.footerContainer}>
         <div

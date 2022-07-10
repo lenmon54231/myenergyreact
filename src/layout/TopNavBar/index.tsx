@@ -14,6 +14,7 @@ const TopNavBar = (props: { title: string }) => {
     </div>
   );
   const back = () => {
+    console.log('fanhui')
     nav(-1);
   };
 
